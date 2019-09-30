@@ -1,9 +1,16 @@
-//create an array of words
-var words = ["rabbit", "snail", "airport", "carrots", "river"];
+//create an array of Artist
+var Artist = [
+  "thescript",
+  "jasonmraz",
+  "taylorswift",
+  "avicii",
+  "sigma",
+  "maroonfive"
+];
 
-//pick a random word from the words array
+//pick a random word from the Artist array
 
-var rand = words[Math.floor(Math.random() * words.length)];
+var rand = Artist[Math.floor(Math.random() * Artist.length)];
 
 //sets up the answerArray to show how many letters there are
 //using _'s
