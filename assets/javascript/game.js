@@ -1,64 +1,62 @@
-//create an array of Artist
-var Artist = [
-  "thescript",
-  "jasonmraz",
-  "taylorswift",
-  "avicii",
-  "sigma",
-  "maroonfive"
-];
+var array = [];
+var currentGuessWord = "";
+var currentMaskedWord = "";
 
-//pick a random word from the Artist array
-
-var rand = Artist[Math.floor(Math.random() * Artist.length)];
-
-//sets up the answerArray to show how many letters there are
-//using _'s
-
-var answerArray = [];
-for (var i = 0; i < rand.length; i++) {
-  answerArray[i] = "_";
-}
-
-//create a variable to hold the number of remainingLetters to be guessed
-var remainingLetters = rand.length;
-
-// ********* THE MAIN GAME LOOP ******************
-
-// while there are letters left to be guessed
-while (remainingLetters > 0) {
-  //show the player their progress
-  alert(answerArray.join(" "));
-
-  //get a guess from the player
-  var guess = prompt("Guess a letter or click cancel to stop playing.");
-
-  //if the guess is blank
-  if (guess == null) {
-    //exit the game loop
-    break;
-    //if the guess is more than one letter or no letters
-  } else if (guess.length !== 1) {
-    //alert the player to guess a single letter
-    alert("Please enter a single letter only.");
-    //valid guess
-  } else {
-    //update the game state with the guess
-    for (var j = 0; j < rand.length; j++) {
-      //if the letter they guessed is in the word
-      //at that point or index
-      if (rand[j] == guess) {
-        //update the answer array with the letter they guessed
-        //at that point or index
-        answerArray[j] = guess;
-        //subtract one from remaining letters
-        remainingLetters--;
-      }
+document.onkeyup = event => {
+  var x = event.key;
+  if (x !== "") {
+    if (array.includes(x)) {
+      alert("You have guessed this letter before, try something else.");
+    } else {
+      validateGuess(x);
     }
   }
-  //***************END OF GAME LOOP*********************
+  document.getElementById("usedLetters").innerHTML = array;
+};
+
+function setNewGuess() {
+  var artist = [
+    "Yesterday all my troubles seemed so far away",
+    "Just a small town girl",
+    "I still haven't found what I'm looking for",
+    "Nah nah nah nah nah nah nah, nah nah nah nah, hey Jude",
+    "Is this the real life? Is this just fantasy?",
+    "I don't want to miss a thing",
+    "Take my hand, we'll make it, I swear",
+    "You've been thunderstruck",
+    "Sing us a song you're the piano man",
+    "Hello darkness my old friend",
+    "Can you feel the love tonight?"
+  ];
+  currentGuessWord = artist[Math.floor(Math.random() * artist.length)];
+  // This replace function uses Regex (Regular Expression) - https://en.wikipedia.org/wiki/Regular_expression
+  currentMaskedWord = currentGuessWord.replace(/[a-zA-Z]/g, "_");
+  document.getElementById("guessWord").innerHTML = currentMaskedWord;
+  array = [];
 }
-//let player know the word
-alert(answerArray.join(" "));
-//Congratulate the player
-alert("Well done! The answer was " + rand);
+
+function validateGuess(x) {
+  if (
+    currentGuessWord.includes(x.toLowerCase()) ||
+    currentGuessWord.includes(x.toUpperCase())
+  ) {
+    for (var i = 0; i < currentGuessWord.length; i++) {
+      if (currentGuessWord[i].toLowerCase() == x) {
+        currentMaskedWord = replaceAt(
+          currentMaskedWord,
+          i,
+          currentGuessWord[i]
+        );
+      }
+    }
+
+    document.getElementById("guessWord").innerHTML = currentMaskedWord;
+  } else {
+    array.push(x);
+  }
+}
+
+//how does it work (https://www.w3schools.com/jsref/jsref_substring.asp)
+function replaceAt(string, index, replace) {
+  return string.substring(0, index) + replace + string.substring(index + 1);
+}
