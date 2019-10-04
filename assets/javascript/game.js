@@ -1,6 +1,8 @@
 var array = [];
 var currentGuessWord = "";
 var currentMaskedWord = "";
+var triesElement = document.getElementById("tryCounter");
+var maxTries = 10;
 
 document.onkeyup = event => {
   var x = event.key;
