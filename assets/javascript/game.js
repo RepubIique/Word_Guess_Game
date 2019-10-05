@@ -4,7 +4,8 @@ var usedLetterArray = [];
 var currentGuessWord = "";
 var currentMaskedWord = "";
 
-var tries = 0;
+var tries = 7;
+var wins = 0;
 
 // When a key is pressed
 document.onkeyup = event => {
@@ -29,9 +30,9 @@ document.onkeyup = event => {
 
 function tryCounter() {
   // When activated, increment counter by 1
-  tries++;
+  tries--;
   // if user made 7 guesses
-  if (tries === 7) {
+  if (tries === 0) {
     // reset game
     setNewGuess();
     alert("You've broke the game");
@@ -42,7 +43,7 @@ function tryCounter() {
 
 function setNewGuess() {
   // reset try counter to 0
-  tries = 0;
+  tries = 7;
   // reset the usedLetterArray
   usedLetterArray = [];
   // possible answers
@@ -103,7 +104,10 @@ function win() {
   // does not have is dictated by "!"
   if (!currentMaskedWord.includes("_")) {
     alert("done");
+    setNewGuess();
+    wins++;
   }
+  document.getElementById("win").innerHTML = wins.toString();
 }
 
 //how does it work (https://www.w3schools.com/jsref/jsref_substring.asp)
