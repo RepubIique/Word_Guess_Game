@@ -37,13 +37,14 @@ class="navbar navbar-light bg-light">
 </nav>
 <body onload="setNewGuess()">
     <div class="container my-3 border border-info pb-1">
-  <h1 class="py-2 px-2 font-weight-bold text-uppercase text-info">Guess The Phrase</h1>
+  <h1 class="py-2 px-2 font-weight-bold text-uppercase text-info">Guess The Artist</h1>
   <hr class="mt-0" />
   <div id='guessWord' style="font-family:'Turret Road',cursive; font-size: 50px" ></div>
   <br/>
   <div>Letters already guessed: [<em id='usedLetters'></em>]</div>
   <div >Remaining Guesses: <b id="tryCounter"></b></div>
   <div >Win Counter: <b id="win"></b></div>
+  <div >Artist: <b id="artistImage"></b></div>
   <br/>
   
   <button id='submitButton' class="btn btn-outline-info" onclick="setNewGuess()">New Game</button>
