@@ -1,61 +1,78 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous"/>
-    <link href="https://fonts.googleapis.com/css?family=Turret+Road&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../Word_Guess_Game/assets/css/style.css">
-    <script src="../Word_Guess_Game/assets/javascript/game.js"></script>
-    <!-- <script src="../../gammmmmeeee.js"></script> -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"/>
+      <link href="https://fonts.googleapis.com/css?family=Turret+Road&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="../Word_Guess_Game/assets/css/style.css">
+      <script src="../Word_Guess_Game/assets/javascript/game.js"></script>
+      <!-- <script src="../../gammmmmeeee.js"></script> -->
 
-  <title>Word Guess Game</title>
-</head>
-<nav
-class="navbar navbar-light bg-light">
-<div>
-  <a class="navbar-brand bg-info text-white py-4 px-3 font-weight-bold ml-4" href="index.html">Kendrick Bong</a>
-</div>
+    <title>Word Guess Game</title>
+  </head>
 
-<div class="navbar-nav pr-4 text-secondary">
-  <div class="nav-link" style="cursor:pointer;">
-    <a href="index.html" style="color: grey; padding-right: 5px;">About</a>
-    <a
-      href="portfolio.html"
-      style="padding: 0px 15px;color: grey; border-left: 2px solid;border-right: 2px solid;"
-      >Portfolio</a
-    >
-    <a href="contact.html" style="color: grey; padding-left: 5px;"
-      >Contact</a
-    >
+  <nav
+  class="navbar navbar-light bg-light">
+    <div>
+    <a class="navbar-brand bg-info text-white py-4 px-3 font-weight-bold ml-4" href="index.html">Kendrick Bong</a>
+    </div>
+
+    <div class="navbar-nav pr-4 text-secondary">
+    <div class="nav-link" style="cursor:pointer;">
+      <a href="index.html" style="color: grey; padding-right: 5px;">About</a>
+      <a
+        href="portfolio.html"
+        style="padding: 0px 15px;color: grey; border-left: 2px solid;border-right: 2px solid;"
+        >Portfolio</a
+      >
+      <a href="contact.html" style="color: grey; padding-left: 5px;"
+        >Contact</a
+      >
+    </div>
+    </div>
+  </nav>
+
+  <body onload="setNewGuess()">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+            <h1 class="py-2 px-2 font-weight-bold text-uppercase text-info">Guess The Artist</h1>
+        </div>
+        <div class="col-lg-4">
+            <img src="../Word_Guess_Game/assets/images/mouse.gif" height="100px" width="100px"> 
+        </div>
+      </div>
+      
+      <hr class="mt-0" />
+      <div id='guessWord' style="font-family:'Turret Road',cursive; font-size: 50px" ></div>
+      <br/>
+      <div class="row">
+        <div class="col-md-6">
+            <div>Letters already guessed: [<em id='usedLetters'></em>]</div>
+            <div >Remaining Guesses: <b id="tryCounter"></b></div>
+            <div >Win Counter: <b id="win"></b></div>
+            <div >Artist: <img id="artistImage" src="../Word_Guess_Game/assets/javascript/game.js" height="200px" width="200px"></div>
+            
+        </div>
+        <div class="col-md-6">
+            <img src="../Word_Guess_Game/assets/images/dog.gif" height="200px" width="200px">
+            <img src="../Word_Guess_Game/assets/images/cat.gif" height="200px" width="200px">      
+        </div>      
+    <br/>
+    
+    <button id='submitButton' class="btn btn-outline-info" onclick="setNewGuess()">New Game</button>
+  </body>
   </div>
-</div>
-</nav>
-<body onload="setNewGuess()">
-    <div class="container my-3 border border-info pb-1">
-  <h1 class="py-2 px-2 font-weight-bold text-uppercase text-info">Guess The Artist</h1>
-  <hr class="mt-0" />
-  <div id='guessWord' style="font-family:'Turret Road',cursive; font-size: 50px" ></div>
-  <br/>
-  <div>Letters already guessed: [<em id='usedLetters'></em>]</div>
-  <div >Remaining Guesses: <b id="tryCounter"></b></div>
-  <div >Win Counter: <b id="win"></b></div>
-  <div >Artist: <b id="artistImage"></b></div>
-  <br/>
-  
-  <button id='submitButton' class="btn btn-outline-info" onclick="setNewGuess()">New Game</button>
-</body>
-</div>
-<footer
-class="fixed-bottom footer bg-secondary text-white text-center py-2"
-style="
-border-top: 8px solid #4aaaa5;"
->
-<p>Copyright ©</p>
-</footer>
-</html>
+    <footer
+      class="fixed-bottom footer bg-secondary text-white text-center py-2"
+      style="
+      border-top: 8px solid #4aaaa5;">
+      <p>Copyright ©</p>
+    </footer>
+  </html>

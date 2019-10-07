@@ -49,43 +49,38 @@ function getNewArtist() {
   var artist_array = [
     {
       name: "Jason Mraz",
-      image: "mraz.jpg",
+      image: "../images/mraz.jpg",
       music: "mraz.mp3"
     },
     {
       name: "Linkin Park",
-      image: "park.jpg",
+      image: "../images/park.jpg",
       music: "park.mp3"
     },
     {
       name: "Taylor Swift",
-      image: "swift.jpg",
+      image: "../images/swift.jpg",
       music: "swift.mp3"
     },
     {
       name: "Avicii",
-      image: "avicii.jpg",
+      image: "../images/avicii.jpg",
       music: "avicii.mp3"
     },
     {
       name: "The Beatles",
-      image: "beatles.jpg",
+      image: "../images/beatles.jpg",
       music: "beatles.mp3"
     },
     {
       name: "Westlife",
-      image: "westlife.jpg",
+      image: "../images/westlife.jpg",
       music: "westlife.mp3"
     },
     {
       name: "Sigma",
-      image: "sigma.jpg",
+      image: "../images/sigma.jpg",
       music: "sigma.mp3"
-    },
-    {
-      name: "BackStreet Boys",
-      image: "boys.jpg",
-      music: "boys.mp3"
     }
   ];
 
@@ -113,25 +108,6 @@ function setNewGuess() {
   gameVariables.usedLetterArray = [];
   // possible answers
   getNewArtist();
-  // var artist = [
-  //   "Taylor Swift",
-  //   "Jason Mraz",
-  //   "Avicii",
-  //   "The Beatles",
-  //   "Sigma",
-  //   "WestLife",
-  //   "Backstreet Boys"
-  // ];
-
-  // // This replace function uses Regex (Regular Expression) - https://en.wikipedia.org/wiki/Regular_expression
-  // gameVariables.currentMaskedWord = gameVariables.currentGuessWord.replace(
-  //   /[a-zA-Z]/g,
-  //   "_"
-  // );
-  // // printing out the try counter and unknown artist
-  // document.getElementById("guessWord").innerHTML =
-  //   gameVariables.currentMaskedWord;
-  // document.getElementById("tryCounter").innerHTML = gameState.tries.toString();
 }
 
 function validateGuess(keyPressed) {
@@ -170,10 +146,19 @@ function win() {
   // does not have is dictated by "!"
   if (!gameVariables.currentMaskedWord.includes("_")) {
     setNewGuess();
-    alert("done");
+    imageDisplay();
     gameState.wins++;
   }
   document.getElementById("win").s = gameState.wins.toString();
+}
+
+function imageDisplay() {
+  var x = (document.getElementById("artistImage").src =
+    gameVariables.currentGuessObject.image);
+  // x.setAttribute("src", "");
+  // x.setAttribute("width", "300");
+  // x.setAttribute("height", "300");
+  // document.body.appendChild(x);
 }
 
 //how does it work (https://www.w3schools.com/jsref/jsref_substring.asp)
