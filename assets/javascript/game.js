@@ -4,6 +4,7 @@ var gameState = {
 };
 
 var gameVariables = {
+  currentGuessObject: {},
   currentGuessWord: "",
   currentMaskedWord: "",
   usedLetterArray: []
@@ -89,10 +90,13 @@ function getNewArtist() {
   ];
 
   // randomizes the answers in "artist" array
-  gameVariables.currentGuessWord =
-    artist_array.name[Math.floor(Math.random() * artist_array.name.length)];
+  gameVariables.currentGuessObject =
+    artist_array[Math.floor(Math.random() * artist_array.length)];
+
+  gameVariables.currentGuessWord = gameVariables.currentGuessObject.name;
+
   // This replace function uses Regex (Regular Expression) - https://en.wikipedia.org/wiki/Regular_expression
-  gameVariables.currentMaskedWord = gameVariables.currentGuessWord.replace(
+  gameVariables.currentMaskedWord = gameVariables.currentGuessObject.name.replace(
     /[a-zA-Z]/g,
     "_"
   );
@@ -132,25 +136,25 @@ function setNewGuess() {
 
 function validateGuess(keyPressed) {
   // when key is pressed, it makes sure that it is either a lower or uppercase
+
+  let { currentGuessWord, currentMaskedWord } = gameVariables;
+
   if (
-    gameVariables.currentGuessWord.includes(keyPressed.toLowerCase()) ||
-    gameVariables.currentGuessWord.includes(keyPressed.toUpperCase())
+    currentGuessWord.includes(keyPressed.toLowerCase()) ||
+    currentGuessWord.includes(keyPressed.toUpperCase())
   ) {
     // checks keypressed against every single character of the word
-    for (var i = 0; i < gameVariables.currentGuessWord.length; i++) {
+    for (var i = 0; i < currentGuessWord.length; i++) {
       // replace "_" with keypressed if "i" is found to be the same
-      if (gameVariables.currentGuessWord[i].toLowerCase() == keyPressed) {
+      if (currentGuessWord[i].toLowerCase() == keyPressed) {
         // replaces gameVariables.currentMaskedWord with that letter
-        gameVariables.currentMaskedWord = replaceAt(
-          gameVariables.currentMaskedWord,
-          i,
-          gameVariables.currentGuessWord[i]
-        );
+        currentMaskedWord = replaceAt(currentMaskedWord, i, keyPressed);
       }
     }
     // updates the guessWord
-    document.getElementById("guessWord").innerHTML =
-      gameVariables.currentMaskedWord;
+    document.getElementById("guessWord").innerHTML = currentMaskedWord;
+
+    gameVariables.currentMaskedWord = currentMaskedWord;
     //runs gameState.win function
     win();
   } else {
@@ -165,11 +169,11 @@ function win() {
   // if gameVariables.currentMaskedWord does not have "_" then alert done
   // does not have is dictated by "!"
   if (!gameVariables.currentMaskedWord.includes("_")) {
-    alert("done");
     setNewGuess();
+    alert("done");
     gameState.wins++;
   }
-  document.getElementById("win").innerHTML = gameState.wins.toString();
+  document.getElementById("win").s = gameState.wins.toString();
 }
 
 //how does it work (https://www.w3schools.com/jsref/jsref_substring.asp)
