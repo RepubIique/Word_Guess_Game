@@ -1,17 +1,13 @@
 var gameState = {
   wins: 0,
-  tries: 7,
-  usedLetterArray: []
+  tries: 7
 };
 
 var gameVariables = {
   currentGuessWord: "",
-  currentMaskedWord: ""
+  currentMaskedWord: "",
+  usedLetterArray: []
 };
-
-// var artist = {
-//   name:
-// };
 
 // When a key is pressed
 document.onkeyup = event => {
@@ -23,15 +19,16 @@ document.onkeyup = event => {
     keyPressed.length === 1
   ) {
     //if key pressed is used before
-    if (gameState.usedLetterArray.includes(keyPressed)) {
+    if (gameVariables.usedLetterArray.includes(keyPressed)) {
       alert("You have guessed this letter before, try something else.");
     } else {
       // run this function with "keyPressed" the keypressed
       validateGuess(keyPressed);
     }
   }
-  //updates the gameState.usedLetterArray
-  document.getElementById("usedLetters").innerHTML = gameState.usedLetterArray;
+  //updates the gameState.gameVariables.usedLetterArray
+  document.getElementById("usedLetters").innerHTML =
+    gameVariables.usedLetterArray;
 };
 
 function tryCounter() {
@@ -47,24 +44,53 @@ function tryCounter() {
   document.getElementById("tryCounter").innerHTML = gameState.tries.toString();
 }
 
-function setNewGuess() {
-  // reset try counter to 0
-  gameState.tries = 7;
-  // reset the gameState.usedLetterArray
-  gameState.usedLetterArray = [];
-  // possible answers
-  var artist = [
-    "Taylor Swift",
-    "Jason Mraz",
-    "Avicii",
-    "The Beatles",
-    "Sigma",
-    "WestLife",
-    "Backstreet Boys"
+function getNewArtist() {
+  var artist_array = [
+    {
+      name: "Jason Mraz",
+      image: "mraz.jpg",
+      music: "mraz.mp3"
+    },
+    {
+      name: "Linkin Park",
+      image: "park.jpg",
+      music: "park.mp3"
+    },
+    {
+      name: "Taylor Swift",
+      image: "swift.jpg",
+      music: "swift.mp3"
+    },
+    {
+      name: "Avicii",
+      image: "avicii.jpg",
+      music: "avicii.mp3"
+    },
+    {
+      name: "The Beatles",
+      image: "beatles.jpg",
+      music: "beatles.mp3"
+    },
+    {
+      name: "Westlife",
+      image: "westlife.jpg",
+      music: "westlife.mp3"
+    },
+    {
+      name: "Sigma",
+      image: "sigma.jpg",
+      music: "sigma.mp3"
+    },
+    {
+      name: "BackStreet Boys",
+      image: "boys.jpg",
+      music: "boys.mp3"
+    }
   ];
+
   // randomizes the answers in "artist" array
   gameVariables.currentGuessWord =
-    artist[Math.floor(Math.random() * artist.length)];
+    artist_array.name[Math.floor(Math.random() * artist_array.name.length)];
   // This replace function uses Regex (Regular Expression) - https://en.wikipedia.org/wiki/Regular_expression
   gameVariables.currentMaskedWord = gameVariables.currentGuessWord.replace(
     /[a-zA-Z]/g,
@@ -74,6 +100,34 @@ function setNewGuess() {
   document.getElementById("guessWord").innerHTML =
     gameVariables.currentMaskedWord;
   document.getElementById("tryCounter").innerHTML = gameState.tries.toString();
+}
+
+function setNewGuess() {
+  // reset try counter to 0
+  gameState.tries = 7;
+  // reset the gameState.gameVariables.usedLetterArray
+  gameVariables.usedLetterArray = [];
+  // possible answers
+  getNewArtist();
+  // var artist = [
+  //   "Taylor Swift",
+  //   "Jason Mraz",
+  //   "Avicii",
+  //   "The Beatles",
+  //   "Sigma",
+  //   "WestLife",
+  //   "Backstreet Boys"
+  // ];
+
+  // // This replace function uses Regex (Regular Expression) - https://en.wikipedia.org/wiki/Regular_expression
+  // gameVariables.currentMaskedWord = gameVariables.currentGuessWord.replace(
+  //   /[a-zA-Z]/g,
+  //   "_"
+  // );
+  // // printing out the try counter and unknown artist
+  // document.getElementById("guessWord").innerHTML =
+  //   gameVariables.currentMaskedWord;
+  // document.getElementById("tryCounter").innerHTML = gameState.tries.toString();
 }
 
 function validateGuess(keyPressed) {
@@ -100,8 +154,8 @@ function validateGuess(keyPressed) {
     //runs gameState.win function
     win();
   } else {
-    // if the key does not matches any letter in the phrase, it pushes that keypressed to the gameState.usedLetterArray
-    gameState.usedLetterArray.push(keyPressed);
+    // if the key does not matches any letter in the phrase, it pushes that keypressed to the gameState.gameVariables.usedLetterArray
+    gameVariables.usedLetterArray.push(keyPressed);
     // runs try counter
     tryCounter();
   }
