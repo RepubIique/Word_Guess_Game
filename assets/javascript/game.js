@@ -38,8 +38,8 @@ function tryCounter() {
   // if user made 7 guesses
   if (gameState.tries === 0) {
     // reset game
+    winLosePanel(false);
     setNewGuess();
-    alert("You've broke the game");
   }
   // updates the try counter
   document.getElementById("tryCounter").innerHTML = gameState.tries.toString();
@@ -49,37 +49,37 @@ function getNewArtist() {
   var artist_array = [
     {
       name: "Jason Mraz",
-      image: "../images/mraz.jpg",
+      image: "../Word_Guess_Game/assets/images/mraz.jpg",
       music: "mraz.mp3"
     },
     {
       name: "Linkin Park",
-      image: "../images/park.jpg",
+      image: "../Word_Guess_Game/assets/images/park.jpg",
       music: "park.mp3"
     },
     {
       name: "Taylor Swift",
-      image: "../images/swift.jpg",
+      image: "../Word_Guess_Game/assets/images/swift.jpg",
       music: "swift.mp3"
     },
     {
       name: "Avicii",
-      image: "../images/avicii.jpg",
+      image: "../Word_Guess_Game/assets/images/avicii.jpg",
       music: "avicii.mp3"
     },
     {
       name: "The Beatles",
-      image: "../images/beatles.jpg",
+      image: "../Word_Guess_Game/assets/images/beatles.jpg",
       music: "beatles.mp3"
     },
     {
       name: "Westlife",
-      image: "../images/westlife.jpg",
+      image: "../Word_Guess_Game/assets/images/westlife.jpg",
       music: "westlife.mp3"
     },
     {
       name: "Sigma",
-      image: "../images/sigma.jpg",
+      image: "../Word_Guess_Game/assets/images/sigma.jpg",
       music: "sigma.mp3"
     }
   ];
@@ -99,12 +99,15 @@ function getNewArtist() {
   document.getElementById("guessWord").innerHTML =
     gameVariables.currentMaskedWord;
   document.getElementById("tryCounter").innerHTML = gameState.tries.toString();
+
+  // document.getElementById("artistImage").src =
+  //   gameVariables.currentGuessObject.image;
 }
 
 function setNewGuess() {
   // reset try counter to 0
   gameState.tries = 7;
-  // reset the gameState.gameVariables.usedLetterArray
+  // reset the gameVariables.usedLetterArray
   gameVariables.usedLetterArray = [];
   // possible answers
   getNewArtist();
@@ -145,20 +148,27 @@ function win() {
   // if gameVariables.currentMaskedWord does not have "_" then alert done
   // does not have is dictated by "!"
   if (!gameVariables.currentMaskedWord.includes("_")) {
-    setNewGuess();
-    imageDisplay();
     gameState.wins++;
+    winLosePanel();
+    var img = document.createElement("img");
+    img.setAttribute("width", "200");
+    img.setAttribute("height", "200");
+    img.src = gameVariables.currentGuessObject.image;
+    document.getElementById("img-singer").appendChild(img);
+    setNewGuess();
   }
-  document.getElementById("win").s = gameState.wins.toString();
+  document.getElementById("win").innerHTML = gameState.wins.toString();
+
+  return true;
 }
 
-function imageDisplay() {
-  var x = (document.getElementById("artistImage").src =
-    gameVariables.currentGuessObject.image);
-  // x.setAttribute("src", "");
-  // x.setAttribute("width", "300");
-  // x.setAttribute("height", "300");
-  // document.body.appendChild(x);
+function winLosePanel() {
+  if (!gameVariables.currentMaskedWord.includes("_")) {
+    document.getElementById("winLoseText").innerHTML =
+      "Congrats you've guessed it correctly";
+  } else {
+    document.getElementById("winLoseText").innerHTML = "Too bad try again";
+  }
 }
 
 //how does it work (https://www.w3schools.com/jsref/jsref_substring.asp)
